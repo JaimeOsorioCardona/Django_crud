@@ -1,0 +1,55 @@
+{% extends "./base.html" %}
+
+{% block title %} Gestión de alimentos {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Gestion de ingredientes</h2>
+        <div class="card">
+            <div class="card-body" py-4> 
+                <form action="/registraralimentos/" method="POST">{% csrf_token %}
+                    <div class="form-group" >
+                        <input type="text" id="txtcodigoA" name="txtcodigoA" class="form-control" placeholder="codigoA" minlength="1" maxlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="nombre" minlength="1" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtcategoria" name="txtcategoria" class="form-control" placeholder="categoria" minlength="1" maxlength="30" required py-4>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado de alimentos</h1>
+        <div class="table-responsive" py-2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Categoria</th>
+                        <th colspan="2">Opciones<th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in alimentos %}
+                    <tr>
+                        <td>{{a.codigoA}}</td>
+                        <td>{{a.nombre}}</td>
+                        <td>{{a.categoria}}</td>
+                        <td><a href="/eliminaralimentos/{{a.codigoA}}" class="btn btn-info">Eliminar</a></td>
+                        <td><a href="/editaralimentos/{{a.codigoA}}" class="btn btn-danger">Modificar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

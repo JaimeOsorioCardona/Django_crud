@@ -1,0 +1,36 @@
+{% extends "./base.html" %}
+
+{% block title %} Edicion de platos {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Edicion de platos</h2>
+        <div class="card">
+            <div class="card-body" py-4> 
+                <form action="/edicionplatos/" method="POST">{% csrf_token %}
+                    <div class="form-group" >
+                        <input type="text" id="txtcodigo" name="txtcodigo" value="{{plato.codigo}}" class="form-control" placeholder="codigo" minlength="1" maxlength="6" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" value="{{plato.nombre}}" class="form-control" placeholder="nombre" minlength="1" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="tiempo_de_preparacion" name="tiempo_de_preparacion" value="{{plato.tiempo_de_preparacion}}" class="form-control" placeholder="tiempo_de_preparacion" min="1" max="60" required> 
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtcategoria" name="txtcategoria" value="{{plato.categoria}}" class="form-control" placeholder="categoria" minlength="1" maxlength="30" required py-4>
+                    </div>
+                    <select type="text" id="ingredientes" name="codigoA_ingredientes" class="form-control" placeholder="ingredientes" min="1" max="60" required>
+                            {% for i in alimentos %}
+                            <option value={{i.codigoA}}>{{i.nombre}}</option>
+                            {% endfor %}
+                    </select>  
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "./base.html" %}
+
+{% block title %} Edicion de alimentos {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Edicion de alimentos</h2>
+        <div class="card">
+            <div class="card-body" py-4> 
+                <form action="/edicionalimentos/" method="POST">{% csrf_token %}
+                    <div class="form-group" >
+                        <input type="text" id="txtcodigo" name="txtcodigoA" value="{{alimentos.codigoA}}" class="form-control" placeholder="codigo" minlength="1" maxlength="6" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" value="{{alimentos.nombre}}" class="form-control" placeholder="nombre" minlength="1" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtcategoria" name="txtcategoria" value="{{alimentos.categoria}}" class="form-control" placeholder="categoria" minlength="1" maxlength="30" required py-4>
+                    </div> 
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
